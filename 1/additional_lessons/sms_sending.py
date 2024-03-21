@@ -42,9 +42,9 @@ class Company:
         
 def send_sms(*persons_and_companies):
     for item in persons_and_companies:
-        if isinstance(item, Person) and item.get_phone != None:
+        if isinstance(item, Person) and not (item.get_phone() is None):
             print(f"Отправлено СМС на номер {item.get_phone()} с текстом: {item.get_sms_text()}")
-        elif isinstance(item, Company) and item.get_phone != None:
+        elif isinstance(item, Company) and not (item.get_phone() is None):
             print(f"Отправлено СМС на номер {item.get_phone()} с текстом: {item.get_sms_text()}")
         else:
             print(f"Не удалось отправить сообщение абоненту: {item.get_name()}") 
@@ -53,6 +53,7 @@ def send_sms(*persons_and_companies):
 
 # Тесты 
 # 1
+
 person1 = Person("Ivan", "Ivanovich", "Ivanov", {"private": 123, "work": 456})
 person2 = Person("Ivan", "Petrovich", "Petrov", {"private": 789})
 person3 = Person("Ivan", "Petrovich", "Sidorov", {"work": 789})
@@ -61,7 +62,7 @@ company1 = Company("Bell", "ООО", {"contact": 111}, person3, person4)
 company2 = Company("Cell", "АО", {"non_contact": 222}, person2, person3)
 company3 = Company("Dell", "Ltd", {"non_contact": 333}, person2, person4)
 send_sms(person1, person2, person3, person4, company1, company2, company3)     
-                
+print(person3.get_phone())                
                 
                 
                 
